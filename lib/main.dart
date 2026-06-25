@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primaryBlue = Color(0xFF0D47A1);
+    const primaryColor = Color.fromARGB(255, 250, 128, 114);
 
     return MaterialApp(
       title: 'Perfil',
@@ -19,12 +19,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: primaryBlue,
+          seedColor: primaryColor,
           brightness: Brightness.light,
         ),
         scaffoldBackgroundColor: const Color(0xFFE3F2FD),
         appBarTheme: const AppBarTheme(
-          backgroundColor: primaryBlue,
+          backgroundColor: primaryColor,
           foregroundColor: Colors.white,
           centerTitle: true,
         ),
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: primaryBlue,
+          seedColor: primaryColor,
           brightness: Brightness.dark,
         ),
         scaffoldBackgroundColor: const Color(0xFF121212),
@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/images/Naim.jpeg'),
+                    backgroundImage: AssetImage('assets/images/image.png'),
                   ),
                   SizedBox(height: 10),
                   Text(
@@ -257,7 +257,7 @@ class SobrePage extends StatelessWidget {
               backgroundColor: Theme.of(context).colorScheme.primary, 
               child: const CircleAvatar(
                 radius: 76,
-                backgroundImage: AssetImage('assets/images/Naim.jpeg'),
+                backgroundImage: AssetImage('assets/images/image.png'),
               ),
             ),
           ),
