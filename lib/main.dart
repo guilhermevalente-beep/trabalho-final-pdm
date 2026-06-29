@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Perfil',
       debugShowCheckedModeBanner: false,
-      
+
       // Tema Claro
       theme: ThemeData(
         brightness: Brightness.light,
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      // Tema Escuro 
+      // Tema Escuro
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      themeMode: ThemeMode.dark,
-      home: const MyHomePage(title: 'Meu Perfil'),
+      themeMode: ThemeMode.light,
+      home: const MyHomePage(title: 'Mundo das Receitas ​👩‍🍳​❤️​'),
     );
   }
 }
@@ -125,12 +125,17 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: selecionarPagina,
         selectedItemColor: isDark ? theme.colorScheme.primary : Colors.white,
         unselectedItemColor: isDark ? Colors.grey[500] : Colors.blue[200],
-        backgroundColor: isDark ? const Color(0xFF1F1F1F) : theme.colorScheme.primary,
+        backgroundColor: isDark
+            ? const Color(0xFF1F1F1F)
+            : theme.colorScheme.primary,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Sobre'),
           BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Formação'),
-          BottomNavigationBarItem(icon: Icon(Icons.contact_mail), label: 'Contato'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.contact_mail),
+            label: 'Contato',
+          ),
         ],
       ),
     );
@@ -141,10 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
       message: title,
       child: ListTile(
         leading: Icon(icon, color: Theme.of(context).colorScheme.primary),
-        title: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.w500),
-        ),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
         onTap: () {
           Navigator.pop(context);
           selecionarPagina(index);
@@ -153,7 +155,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
 
 Widget _buildSectionTitle(BuildContext context, String text) {
   return Center(
@@ -175,11 +176,13 @@ Widget _buildInfoRow(BuildContext context, IconData icon, String text) {
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
-        color: theme.cardColor, 
-        borderRadius: BorderRadius.circular(12), 
+        color: theme.cardColor,
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: theme.brightness == Brightness.dark ? 0.2 : 0.03),
+            color: Colors.black.withValues(
+              alpha: theme.brightness == Brightness.dark ? 0.2 : 0.03,
+            ),
             blurRadius: 6,
             offset: const Offset(0, 2),
           ),
@@ -192,10 +195,7 @@ Widget _buildInfoRow(BuildContext context, IconData icon, String text) {
           Flexible(
             child: Text(
               text,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
           ),
         ],
@@ -204,12 +204,19 @@ Widget _buildInfoRow(BuildContext context, IconData icon, String text) {
   );
 }
 
-Widget _buildCardContato(BuildContext context, IconData icon, String title, String subtitle) {
+Widget _buildCardContato(
+  BuildContext context,
+  IconData icon,
+  String title,
+  String subtitle,
+) {
   return Card(
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12),
-      side: BorderSide(color: Theme.of(context).dividerColor.withValues(alpha: 0.2)),
+      side: BorderSide(
+        color: Theme.of(context).dividerColor.withValues(alpha: 0.2),
+      ),
     ),
     child: ListTile(
       leading: Icon(icon, color: Theme.of(context).colorScheme.primary),
@@ -219,10 +226,7 @@ Widget _buildCardContato(BuildContext context, IconData icon, String title, Stri
       ),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
-        ),
+        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
       ),
     ),
   );
@@ -246,7 +250,9 @@ class SobrePage extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.15),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(alpha: 0.15),
                   blurRadius: 16,
                   spreadRadius: 2,
                 ),
@@ -254,7 +260,7 @@ class SobrePage extends StatelessWidget {
             ),
             child: CircleAvatar(
               radius: 80,
-              backgroundColor: Theme.of(context).colorScheme.primary, 
+              backgroundColor: Theme.of(context).colorScheme.primary,
               child: const CircleAvatar(
                 radius: 76,
                 backgroundImage: AssetImage('assets/images/image.png'),
@@ -263,9 +269,83 @@ class SobrePage extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 32),
-        _buildInfoRow(context, Icons.person, 'Nome: Guilherme'),
-        _buildInfoRow(context, Icons.work, 'Profissão: Estudante'),
-        _buildInfoRow(context, Icons.school, 'Instituição: UESPI'),
+        Card(
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: () {
+              print("Clicou em Doces");
+            },
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/capa_doce.jpeg',
+                  height: 180,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text(
+                    '🧁​ Doces',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        Card(
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: () {
+              print("Clicou em Salgados");
+            },
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/capa_salgados.jpeg',
+                  height: 180,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text(
+                    '🍔​​ Salgados',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        Card(
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: () {
+              print("Clicou em Sucos");
+            },
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/capa_sucos.jpeg',
+                  height: 180,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text(
+                    '​🥤​​​ Sucos',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         _buildInfoRow(context, Icons.cake, 'Idade: 20 anos'),
       ],
     );
@@ -277,7 +357,9 @@ class Formacao extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderSide = BorderSide(color: Theme.of(context).dividerColor.withValues(alpha: 0.2));
+    final borderSide = BorderSide(
+      color: Theme.of(context).dividerColor.withValues(alpha: 0.2),
+    );
 
     return ListView(
       padding: const EdgeInsets.all(24),
@@ -285,22 +367,34 @@ class Formacao extends StatelessWidget {
         _buildSectionTitle(context, 'Formação Acadêmica'),
         const SizedBox(height: 24),
         Card(
-          elevation: 0, 
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: borderSide),
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: borderSide,
+          ),
           child: const ListTile(
             contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
             leading: Icon(Icons.school, size: 28),
-            title: Text('Curso: Ciências da Computação', style: TextStyle(fontWeight: FontWeight.bold)),
+            title: Text(
+              'Curso: Ciências da Computação',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             subtitle: Text('Instituição: UESPI'),
           ),
         ),
         Card(
           elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: borderSide),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: borderSide,
+          ),
           child: const ListTile(
             contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
             leading: Icon(Icons.computer, size: 28),
-            title: Text('Curso: GitHub', style: TextStyle(fontWeight: FontWeight.bold)),
+            title: Text(
+              'Curso: GitHub',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             subtitle: Text('Instituição: UESPI'),
           ),
         ),
@@ -319,21 +413,30 @@ class Contato extends StatelessWidget {
       children: [
         _buildSectionTitle(context, 'Contato'),
         const SizedBox(height: 24),
-        _buildCardContato(context, Icons.email, 'Email', 'guilhermevalente@aluno.uespi.br'),
-        _buildCardContato(context, Icons.code, 'GitHub', 'github.com/guilhermevalente-beep'),
+        _buildCardContato(
+          context,
+          Icons.email,
+          'Email',
+          'guilhermevalente@aluno.uespi.br',
+        ),
+        _buildCardContato(
+          context,
+          Icons.code,
+          'GitHub',
+          'github.com/guilhermevalente-beep',
+        ),
         _buildCardContato(context, Icons.phone, 'Telefone', '(89) 9 8115-6422'),
         _buildCardContato(context, Icons.location_on, 'Cidade', 'Floriano-PI'),
       ],
     );
   }
 }
+
 class Doces extends StatelessWidget {
   const Doces({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Doces'),
-    );
+    return const Center(child: Text('Doces'));
   }
 }
