@@ -1162,14 +1162,14 @@ class SucosPage extends StatelessWidget {
                 width: 60,
                 fit: BoxFit.cover,
               ),
-              title: const Text("Suco de maracunja ​🍈​​"),
+              title: const Text("Suco de maracujá ​🍈​​"),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const ReceitaPage(
-                      nome: "​​​Suco de maracunja 🍈",
+                      nome: "​​​Suco de maracujá 🍈",
                       imagem: "assets/images/suco_maracunja.jpeg",
                       ingredientes: [],
                       massa: [
