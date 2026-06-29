@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primaryColor = Color.fromARGB(255, 250, 128, 114);
+    const primaryColor = Color.fromARGB(255, 243, 147, 136);
 
     return MaterialApp(
       title: 'receitas',
@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
           seedColor: primaryColor,
           brightness: Brightness.light,
         ),
-        scaffoldBackgroundColor: const Color(0xFFE3F2FD),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 245, 210, 211),
         appBarTheme: const AppBarTheme(
           backgroundColor: primaryColor,
-          foregroundColor: Colors.white,
+          foregroundColor: Color.fromARGB(255, 247, 234, 234),
           centerTitle: true,
         ),
       ),
@@ -37,9 +37,9 @@ class MyApp extends StatelessWidget {
           seedColor: primaryColor,
           brightness: Brightness.dark,
         ),
-        scaffoldBackgroundColor: const Color(0xFF121212),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 249, 243, 243),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF1F1F1F),
+          backgroundColor: Color.fromARGB(255, 249, 241, 241),
           foregroundColor: Colors.white,
           centerTitle: true,
         ),
@@ -63,8 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _paginaAtual = 0;
 
   final List<Widget> _paginas = [
-    const SobrePage(),
-    const Formacao(),
+    const ReceitasPage(),
+    const sobre(),
     const Contato(),
   ];
 
@@ -113,8 +113,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            _buildDrawerItem(Icons.person, 'Receitas', 0),
-            _buildDrawerItem(Icons.school, 'Sobre', 1),
+            _buildDrawerItem(Icons.ramen_dining, 'Receitas', 0),
+            _buildDrawerItem(Icons.business, 'Sobre', 1),
             _buildDrawerItem(Icons.contact_mail, 'Contato', 2),
           ],
         ),
@@ -124,13 +124,16 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _paginaAtual,
         onTap: selecionarPagina,
         selectedItemColor: isDark ? theme.colorScheme.primary : Colors.white,
-        unselectedItemColor: isDark ? Colors.grey[500] : Colors.blue[200],
+        unselectedItemColor: isDark ? const Color.fromARGB(255, 243, 129, 129) : const Color.fromARGB(255, 247, 173, 182),
         backgroundColor: isDark
-            ? const Color(0xFF1F1F1F)
+            ? const Color.fromARGB(255, 239, 233, 233)
             : theme.colorScheme.primary,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.ramen_dining), label: 'Receitas'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.ramen_dining),
+            label: 'Receitas',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.business), label: 'Sobre'),
           BottomNavigationBarItem(
             icon: Icon(Icons.contact_mail),
@@ -180,7 +183,7 @@ Widget _buildInfoRow(BuildContext context, IconData icon, String text) {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(
+            color: const Color.fromARGB(255, 244, 240, 240).withValues(
               alpha: theme.brightness == Brightness.dark ? 0.2 : 0.03,
             ),
             blurRadius: 6,
@@ -222,7 +225,7 @@ Widget _buildCardContato(
       leading: Icon(icon, color: Theme.of(context).colorScheme.primary),
       title: Text(
         title,
-        style: const TextStyle(fontSize: 12, color: Colors.grey),
+        style: const TextStyle(fontSize: 12, color: Color.fromARGB(255, 132, 30, 30)),
       ),
       subtitle: Text(
         subtitle,
@@ -234,15 +237,14 @@ Widget _buildCardContato(
 
 //PÁGINAS
 
-class SobrePage extends StatelessWidget {
-  const SobrePage({super.key});
+class ReceitasPage extends StatelessWidget {
+  const ReceitasPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(24),
       children: [
-        _buildSectionTitle(context, 'Quem eu sou?'),
         const SizedBox(height: 24),
         Center(
           child: Container(
@@ -289,7 +291,7 @@ class SobrePage extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.all(12),
                   child: Text(
-                    '🧁​ Doces',
+                    'Doces 🧁​',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -318,7 +320,7 @@ class SobrePage extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.all(12),
                   child: Text(
-                    '🍔​​ Salgados',
+                    'Salgados 🍔​​',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -360,50 +362,58 @@ class SobrePage extends StatelessWidget {
   }
 }
 
-class Formacao extends StatelessWidget {
-  const Formacao({super.key});
+class sobre extends StatelessWidget {
+  const sobre({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final borderSide = BorderSide(
-      color: Theme.of(context).dividerColor.withValues(alpha: 0.2),
-    );
+    final theme = Theme.of(context);
 
     return ListView(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       children: [
-        _buildSectionTitle(context, 'Formação Acadêmica'),
-        const SizedBox(height: 24),
         Card(
-          elevation: 0,
+          elevation: 6,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-            side: borderSide,
+            borderRadius: BorderRadius.circular(20),
           ),
-          child: const ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            leading: Icon(Icons.school, size: 28),
-            title: Text(
-              'Curso: Ciências da Computação',
-              style: TextStyle(fontWeight: FontWeight.bold),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 45,
+                  backgroundColor: theme.colorScheme.primary,
+                  child: const Icon(
+                    Icons.restaurant_menu,
+                    size: 45,
+                    color: Colors.white,
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                Text(
+                  "Mundo das Receitas 👩‍🍳❤️",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                const Text(
+                  "O Mundo das Receitas é um aplicativo desenvolvido pela empresa Mundo das Receitas com o propósito de oferecer uma experiência prática, organizada e acessível para todos os apaixonados por culinária.\n\n"
+                  "Nossa plataforma reúne receitas cuidadosamente selecionadas de doces, salgados e sucos, apresentadas de forma clara e intuitiva. Cada receita conta com imagens ilustrativas, lista de ingredientes e um passo a passo detalhado, proporcionando mais praticidade e confiança durante o preparo.\n\n"
+                  "Na Mundo das Receitas, acreditamos que cozinhar vai além de preparar alimentos: é uma forma de compartilhar momentos, criar memórias e aproximar pessoas. Por isso, buscamos desenvolver soluções que tornem a experiência na cozinha mais simples, agradável e inspiradora.\n\n"
+                  "Nosso compromisso é oferecer conteúdo de qualidade e uma navegação intuitiva, incentivando usuários de todos os níveis de experiência a descobrir novos sabores e transformar cada refeição em um momento especial.",
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(fontSize: 16, height: 1.6),
+                ),
+              ],
             ),
-            subtitle: Text('Instituição: UESPI'),
-          ),
-        ),
-        Card(
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-            side: borderSide,
-          ),
-          child: const ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            leading: Icon(Icons.computer, size: 28),
-            title: Text(
-              'Curso: GitHub',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text('Instituição: UESPI'),
           ),
         ),
       ],
@@ -414,32 +424,139 @@ class Formacao extends StatelessWidget {
 class Contato extends StatelessWidget {
   const Contato({super.key});
 
+  Widget _item(IconData icon, String titulo, String texto) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: [
+          Icon(icon, color: const Color.fromARGB(255, 236, 76, 76), size: 28),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  titulo,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: Color.fromARGB(255, 252, 99, 99),
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  texto,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return ListView(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       children: [
-        _buildSectionTitle(context, 'Contato'),
-        const SizedBox(height: 24),
-        _buildCardContato(
-          context,
-          Icons.email,
-          'Email',
-          'guilhermevalente@aluno.uespi.br',
+        Card(
+          elevation: 8,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(22),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 42,
+                  backgroundColor: theme.colorScheme.primary,
+                  child: const Icon(
+                    Icons.support_agent,
+                    color: Colors.white,
+                    size: 42,
+                  ),
+                ),
+
+                const SizedBox(height: 18),
+
+                Text(
+                  "Central de Atendimento",
+                  style: TextStyle(
+                    color: theme.colorScheme.primary,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                const Text(
+                  "Para mais informações, entre em contato com nossa equipe. "
+                  "Teremos prazer em atender você! ❤️",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.grey,
+                    height: 1.5,
+                  ),
+                ),
+
+                const SizedBox(height: 25),
+
+                const Divider(),
+
+                _item(
+                  Icons.email_outlined,
+                  "E-mail",
+                  "contato@mundodasreceitas.com",
+                ),
+
+                const Divider(),
+
+                _item(
+                  Icons.phone_outlined,
+                  "Telefone",
+                  "(89) 3333-2025",
+                ),
+
+                const Divider(),
+
+                _item(
+                  Icons.location_on_outlined,
+                  "Endereço",
+                  "Av. Dirceu Arcoverde, 1000\nFloriano - PI",
+                ),
+
+                const Divider(),
+
+                _item(
+                  Icons.language,
+                  "Website",
+                  "www.mundodasreceitas.com",
+                ),
+
+                const Divider(),
+
+                _item(
+                  Icons.schedule,
+                  "Horário de Atendimento",
+                  "Segunda a Sexta\n08:00 às 18:00",
+                ),
+              ],
+            ),
+          ),
         ),
-        _buildCardContato(
-          context,
-          Icons.code,
-          'GitHub',
-          'github.com/guilhermevalente-beep',
-        ),
-        _buildCardContato(context, Icons.phone, 'Telefone', '(89) 9 8115-6422'),
-        _buildCardContato(context, Icons.location_on, 'Cidade', 'Floriano-PI'),
       ],
     );
   }
 }
-
 class Doces extends StatelessWidget {
   const Doces({super.key});
 
@@ -739,7 +856,7 @@ class SalgadosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("​​🍔​ Salgados​")),
+      appBar: AppBar(title: const Text("​​Salgados 🍔​​")),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
